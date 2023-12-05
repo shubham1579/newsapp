@@ -24,6 +24,7 @@ const NewsContextProvider = ({ children }) => {
         fetch(`https://newsapi.org/v2/everything?domains=wsj.com&apiKey=${NEWS_API_KEY}`)
         .then((res) => res.json())
         .then((res) => setArticles(res.articles))
+        .catch((err) => console.log(err))
 
     }, []);
 
