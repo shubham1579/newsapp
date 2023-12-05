@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import NewsBoardPage from "./pages/NewsBoardPage";
+import { AuthContextProvider } from "./context/authContext";
+import { NewsContextProvider } from "./context/newsContext";
+import LoginPage from "./pages/LoginPage";
+import SignUpPage from "./pages/SignUpPage";
+import FavoritePage from "./pages/FavoritesPage";
+
 
 function App() {
+
+  const router = createBrowserRouter([
+    {path: '/', element: <NewsBoardPage />},
+    {path: '/login', element: <LoginPage />},
+    {path: '/signup', element: <SignUpPage />},
+    {path: '/favorites', element: <FavoritePage />}
+  ]);
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthContextProvider>
+      <NewsContextProvider>
+        <RouterProvider router={router} />
+      </NewsContextProvider>
+    </AuthContextProvider>
   );
 }
 
