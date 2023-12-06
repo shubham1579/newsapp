@@ -23,7 +23,7 @@ const NewsContextProvider = ({ children }) => {
     const { userId } = useAuth();
 
     useEffect(() => {
-
+        
         setLoading(true);
         fetch(`https://gnews.io/api/v4/top-headlines?category=general&lang=en&apikey=${NEWS_API_KEY}`)
         .then((res) => res.json())
@@ -34,8 +34,12 @@ const NewsContextProvider = ({ children }) => {
         .catch((err) => {
             console.log('error', err);
             const cachedNews = localStorage.getItem('cachedNews');
-            if(cachedNews){
-                setArticles(cachedNews);
+            if (cachedNews) {
+                setArticles(JSON.parse(cachedNews));
+                setLoading(false);
+            }
+            else {
+                setLoading(false);
             }
         });
 
