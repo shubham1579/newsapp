@@ -7,7 +7,7 @@ import { useNewsContext } from '../context/newsContext';
 
 export default function Navbar() {
 
-    const { isAuthenticated, userName, handleLogOut } = useAuth();
+    const { isAuthenticated, userName, handleLogOut, userId } = useAuth();
     const { toggleNewsView } = useNewsContext();
 
 
@@ -19,15 +19,15 @@ export default function Navbar() {
                         <>
                             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                                 <div className="flex h-16 items-center justify-between">
-                                    <Link to={'/'} className='text-white font-semibold cursor-pointer'>
+                                    <Link to={isAuthenticated ? `/${userId}` : '/'} className='text-white font-semibold cursor-pointer'>
                                         News App
                                     </Link>
                                     
                                     <div className='flex items-center'>
                                         <div className="ml-4 flex items-center md:ml-6">
                                             {isAuthenticated ? <Link
-                                                to={'/favorites'}
-                                                className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                                                to={`/${userId}/favorites`}
+                                                className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-800"
                                             >
                                                 <HeartIcon className="h-6 w-6 text-red-500" aria-hidden="true" />
                                             </Link> : ''}

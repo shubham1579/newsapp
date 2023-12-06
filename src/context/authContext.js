@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "../firestore";
 import { signOut } from "firebase/auth";
+import { toast } from "react-toastify";
 
 const authContext = createContext();
 
@@ -14,8 +15,8 @@ const AuthContextProvider = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [userName, setUserName] = useState(null);
     const [userId, setUserId] = useState(null);
-    const [loggedOut, setLoggedOut] = useState(false);
-    const [signIn, setSignIn] = useState(false);
+    // const [logged, setLoggedOut] = useState(false);
+    const [loggedIn, setLoggedIn] = useState(false);
 
     useEffect(() => {
         auth.onAuthStateChanged((user) => {
@@ -35,18 +36,18 @@ const AuthContextProvider = ({ children }) => {
         signOut(auth)
         .then(() => {
             setIsAuthenticated(false);
-            setLoggedOut(true);
+            setLoggedIn(false);
         })
         .catch((err) => {
             console.log(err);
         })
 
-        // toast("Sign out successful");
+        toast("Sign out successful");
     }
 
 
     return (
-        <authContext.Provider value={{ isAuthenticated, userName, setUserName, setIsAuthenticated, handleLogOut, userId, setUserId }}>
+        <authContext.Provider value={{ isAuthenticated, userName, setUserName, setIsAuthenticated, handleLogOut, userId, setUserId, loggedIn, setLoggedIn }}>
             {children}
         </authContext.Provider>
     )
