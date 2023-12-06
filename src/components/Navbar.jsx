@@ -1,14 +1,11 @@
-// import { Fragment } from 'react'
-import { Disclosure } from '@headlessui/react'
-import { Bars3Icon, XMarkIcon, HeartIcon, Squares2X2Icon } from '@heroicons/react/24/outline'
-import { Link } from 'react-router-dom'
-import { useAuth } from '../context/authContext'
-import { useNewsContext } from '../context/newsContext';
+import { Disclosure } from '@headlessui/react';
+import { Bars3Icon, XMarkIcon, HeartIcon } from '@heroicons/react/24/outline';
+import { Link } from 'react-router-dom';
+import { useAuth } from '../context/authContext';
 
 export default function Navbar() {
 
     const { isAuthenticated, userName, handleLogOut } = useAuth();
-    const { toggleNewsView } = useNewsContext();
 
 
     return (
@@ -71,9 +68,38 @@ export default function Navbar() {
                         </>
                     )}
                 </Disclosure>
-                <header className="bg-white shadow">
+                {/* <header className="bg-white shadow">
                     <div className="mx-auto flex justify-between items-center max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                        <h1 className="text-3xl font-bold tracking-tight text-gray-900">Latest News</h1>
+                        <div className='flex'>
+                            <NavLink
+                                onClick={() => setNewsCat('general')}
+                                style={newsCat === 'general' ? {color: 'red'} : null}
+                                className='pr-2 cursor-pointer'
+                            >
+                                General
+                            </NavLink>
+                            <NavLink
+                                onClick={() => setNewsCat('world')}
+                                style={newsCat === 'world' ? {color: 'red'} : null}
+                                className='pr-2 cursor-pointer'
+                            >
+                                World
+                            </NavLink>
+                            <NavLink
+                                onClick={() => setNewsCat('nation')}
+                                style={newsCat === 'nation' ? {color: 'red'} : null}
+                                className='pr-2 cursor-pointer'
+                            >
+                                Nation
+                            </NavLink>
+                            <NavLink
+                                onClick={() => setNewsCat('business')}
+                                style={newsCat === 'business' ? {color: 'red'} : null}
+                                className='cursor-pointer'
+                            >
+                                Business
+                            </NavLink>
+                        </div>
                         <button 
                             className="-m-2 ml-5 p-2 text-gray-400 hover:text-gray-500 sm:ml-7"
                             onClick={() => toggleNewsView()}
@@ -82,7 +108,7 @@ export default function Navbar() {
                             <Squares2X2Icon className="h-5 w-5" aria-hidden="true" />
                         </button>
                     </div>
-                </header>
+                </header> */}
             </div>
         </>
     )

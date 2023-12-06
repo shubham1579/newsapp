@@ -19,13 +19,14 @@ const NewsContextProvider = ({ children }) => {
     const [gridView, setGridView] = useState(false);
     const [loading, setLoading] = useState(false);
     const [favLoading, setFavLoading] = useState(false);
+    const [newsCat, setNewsCat] = useState('general');
 
     const { userId } = useAuth();
 
     useEffect(() => {
         
         setLoading(true);
-        fetch(`https://gnews.io/api/v4/top-headlines?category=general&lang=en&apikey=${NEWS_API_KEY}`)
+        fetch(`https://gnews.io/api/v4/top-headlines?category=${newsCat}&lang=en&apikey=${NEWS_API_KEY}`)
         .then((res) => res.json())
         .then((data) => {
             setArticles(data.articles);
@@ -43,7 +44,7 @@ const NewsContextProvider = ({ children }) => {
             }
         });
 
-    }, []);
+    }, [newsCat]);
 
     useEffect(() => {
         setFavLoading(true);
@@ -88,7 +89,7 @@ const NewsContextProvider = ({ children }) => {
 
 
     return (
-        <newsContext.Provider value={{ articles, addToFavorite, favoriteArticles, removeFromFavorite, toggleNewsView, gridView, loading, favLoading, toast }}>
+        <newsContext.Provider value={{ articles, addToFavorite, favoriteArticles, removeFromFavorite, toggleNewsView, gridView, loading, favLoading, toast, setNewsCat, newsCat }}>
             {children}
         </newsContext.Provider>
     )
