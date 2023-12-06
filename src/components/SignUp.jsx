@@ -1,6 +1,6 @@
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useForm } from "react-hook-form";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { auth } from "../firestore";
 import { useAuth } from "../context/authContext";
 import 'react-toastify/dist/ReactToastify.css';
@@ -10,7 +10,8 @@ import { ToastContainer, toast } from "react-toastify";
 export default function SignUp(){
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm({mode: "all"});
-    const { setUserName, setIsAuthenticated, setUserId, loggedIn, setLoggedIn, userId } = useAuth();
+    const { setUserName, setIsAuthenticated, setUserId } = useAuth();
+    const navigate = useNavigate();
 
     const onSubmit = (data) => {
 
@@ -24,7 +25,8 @@ export default function SignUp(){
             setUserName(user.displayName);
             setUserId(user.uid);
             setIsAuthenticated(true);
-            setLoggedIn(true);
+            navigate('/');
+            // setLoggedIn(true);
         })
         .catch((err) => {
             console.log(err.message);
@@ -37,7 +39,6 @@ export default function SignUp(){
 
     return (
         <>
-            {loggedIn && <Navigate to={`/${userId}`} replace={true} />}
             <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
                 <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                     <h2 className="mt-0 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">

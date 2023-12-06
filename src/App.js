@@ -11,10 +11,9 @@ function App() {
 
   const router = createBrowserRouter([
     {path: '/', element: <NewsBoardPage />},
-    {path: '/:id', element: <NewsBoardPage />},
     {path: '/login', element: <LoginPage />},
     {path: '/signup', element: <SignUpPage />},
-    {path: '/:id/favorites', element: <FavoritePage />}
+    {path: '/favorites', element: <FavoritePage />}
   ]);
 
 

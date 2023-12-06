@@ -24,6 +24,7 @@ const AuthContextProvider = ({ children }) => {
                 setUserId(user.uid);
                 setIsAuthenticated(true);
                 setUserName(user.displayName);
+                setLoggedIn(true);
             }
             else{
                 setIsAuthenticated(false);

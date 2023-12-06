@@ -33,13 +33,16 @@ function NewsBoard() {
         else {
             setIsPopupOpen(true);
             setSelectedArticle(article);
+            const recentArticles = JSON.parse(localStorage.getItem('cachedNews')) || [];
+            if (!recentArticles.find((ele) => ele.title === article.title)){
+                localStorage.setItem('cachedNews', JSON.stringify([...recentArticles, article]));
+            }
         }
     }
 
     const closePopup = () => {
         setIsPopupOpen(false);
     }
-
 
 
     return (

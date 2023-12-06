@@ -25,13 +25,19 @@ const NewsContextProvider = ({ children }) => {
     useEffect(() => {
 
         setLoading(true);
-        fetch(`https://gnews.io/api/v4/top-headlines?category=general&apikey=${NEWS_API_KEY}`)
+        fetch(`https://gnews.io/api/v4/top-headlines?category=general&lang=en&apikey=${NEWS_API_KEY}`)
         .then((res) => res.json())
         .then((data) => {
             setArticles(data.articles);
             setLoading(false);
         })
-        .catch((err) => console.log(err))
+        .catch((err) => {
+            console.log('error', err);
+            const cachedNews = localStorage.getItem('cachedNews');
+            if(cachedNews){
+                setArticles(cachedNews);
+            }
+        });
 
     }, []);
 
